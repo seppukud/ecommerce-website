@@ -1,0 +1,7 @@
+python-redis
+redis
+flask
+werkzeug
+pyodbc
+azure-storage-queue==1.4.0
+
