@@ -3,7 +3,7 @@ import os
 
 RESOURCE_GROUP = 'EcomWebsiteRG'
 LOCATION = 'eastus'  # example Azure availability zone, should match resource group
-SQL_SERVER = 'ecommercewebsite.database.windows.net'
+SQL_SERVER = 'ecommercewebsite2.database.windows.net'
 SQL_DB = 'UserDatabase'
 USERNAME = os.environ['SQL_DB_USERNAME']
 PASSWORD = os.environ['SQL_DB_PASSWORD']
