@@ -293,7 +293,7 @@ def checkout():
         # add in database orders with state.
         with sql_connection().conn as con:
             item_orderId_mapping = []
-            queue_service = QueueService(account_name=STORAGE_ACCOUNT_NAME,account_key=STORAGE_ACCESS_KEY)
+            queue_service = QueueServiceClient(account_name=STORAGE_ACCOUNT_NAME,account_key=STORAGE_ACCESS_KEY)
             for item in products:
                 try:
                     cur = con.cursor()
@@ -315,8 +315,8 @@ def checkout():
                     })
 
                     # add the order details in queue.
-                    queue_service.encode_function = QueueMessageFormat.binary_base64encode
-                    queue_service.decode_function = QueueMessageFormat.binary_base64decode
+                    queue_service.encode_function = QueueMessage.binary_base64encode
+                    queue_service.decode_function = QueueMessage.binary_base64decode
                     queue_service.put_message("orders", base64.b64encode(json.dumps(queue_entry).encode()))
                 except Exception as e:
                     con.rollback()
