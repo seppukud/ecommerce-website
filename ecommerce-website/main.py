@@ -8,7 +8,7 @@ import string
 import redis
 import json
 import os
-from azure.storage.queue import QueueService, QueueMessageFormat
+from azure.storage.queue import QueueServiceClient, QueueClient, QueueMessage
 
 def randomString(stringLength=8):
     letters = string.ascii_lowercase
@@ -17,9 +17,9 @@ def randomString(stringLength=8):
 app = Flask(__name__)
 app.secret_key = randomString()
 AZURE_CDN_ENDPOINT = 'https://ecommercecdnendpoint.azureedge.net/'
-STORAGE_ACCOUNT_NAME = "cdnstorageaccount1"
+STORAGE_ACCOUNT_NAME = "cdnstorageaccount2"
 STORAGE_ACCESS_KEY = os.environ['STORAGE_ACCESS_KEY']
-BLOB_ACCOUNT_CONTAINER_URL = 'https://cdnstorageaccount1.blob.core.windows.net/ecomblobcontainer/'
+BLOB_ACCOUNT_CONTAINER_URL = 'https://cdnstorageaccount2.blob.core.windows.net/ecomblobcontainer/'
 REDIS_ACCESS_KEY = os.environ['REDIS_ACCESS_KEY']
 REDIS_HOSTNAME  = "ecommercecache.redis.cache.windows.net"
 ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png', 'gif'])
