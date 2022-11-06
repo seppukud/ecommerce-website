@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'EcomWebsiteFrontEnd'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_598E592E9A2540669D1EFD5490DA5245 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AD7AB050A2934F8ABE2D469DE3F6E260 }}
