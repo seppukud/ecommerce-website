@@ -1,5 +1,5 @@
 {
-    "appService.defaultWebAppToDeploy": "/subscriptions/04a2e7f5-3662-4673-90fe-c38ba145ecda/appservices/subscriptions/04a2e7f5-3662-4673-90fe-c38ba145ecda/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/EcomWebsiteFrontEnd",
+    "appService.defaultWebAppToDeploy": "/subscriptions/04a2e7f5-3662-4673-90fe-c38ba145ecda/appservices/subscriptions/04a2e7f5-3662-4673-90fe-c38ba145ecda/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/Bigskyecom",
     "appService.deploySubpath": "ecommerce-website",
     "appService.zipIgnorePattern": [
         "__pycache__{,/**}",
