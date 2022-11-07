@@ -54,24 +54,41 @@ def getLoginDetails():
     conn.close()
     return (loggedIn, firstName, noOfItems)
 
+
+# @app.route("/")
+# def root():
+#     loggedIn, firstName, noOfItems = getLoginDetails()
+#     conn_obj = sql_connection()
+#     homepage_from_redis = redis_client.get("homepage")
+#     if homepage_from_redis:
+#         print("hitting cache to retrieve homepage")
+#         return homepage_from_redis.decode("utf-8")
+#     with conn_obj.conn as conn:
+#         cur = conn.cursor()
+#         cur.execute('SELECT productId, name, price, description, image, stock FROM products')
+#         itemData = cur.fetchall()
+#         cur.execute('SELECT categoryId, name FROM categories')
+#         categoryData = cur.fetchall()
+#     itemData = parse(itemData)
+#     rendered_output = render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryData=categoryData)
+#     redis_client.set("homepage", rendered_output)
+#     return rendered_output
+
+
 @app.route("/")
 def root():
     loggedIn, firstName, noOfItems = getLoginDetails()
     conn_obj = sql_connection()
-    homepage_from_redis = redis_client.get("homepage")
-    if homepage_from_redis:
-        print("hitting cache to retrieve homepage")
-        return homepage_from_redis.decode("utf-8")
     with conn_obj.conn as conn:
         cur = conn.cursor()
         cur.execute('SELECT productId, name, price, description, image, stock FROM products')
         itemData = cur.fetchall()
         cur.execute('SELECT categoryId, name FROM categories')
         categoryData = cur.fetchall()
-    itemData = parse(itemData)
-    rendered_output = render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryData=categoryData)
-    redis_client.set("homepage", rendered_output)
-    return rendered_output
+    itemData = parse(itemData)   
+    return render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems, categoryData=categoryData)
+
+
 
 @app.route("/add")
 def admin():
