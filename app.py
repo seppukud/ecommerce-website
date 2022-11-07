@@ -8,7 +8,9 @@ import string
 import redis
 import json
 import os
-from azure.storage.queue import QueueServiceClient, QueueClient, QueueMessage
+#from azure.storage.queue import QueueServiceClient, QueueClient, QueueMessage
+
+from azure.storage.queue import QueueService, QueueMessageFormat
 
 def randomString(stringLength=8):
     letters = string.ascii_lowercase
@@ -18,9 +20,15 @@ app = Flask(__name__)
 app.secret_key = randomString()
 AZURE_CDN_ENDPOINT = 'https://ecommercecdnendpoint.azureedge.net/'
 STORAGE_ACCOUNT_NAME = "cdnstorageaccount2"
-STORAGE_ACCESS_KEY = os.environ['STORAGE_ACCESS_KEY']
+
+#STORAGE_ACCESS_KEY = os.environ['STORAGE_ACCESS_KEY']
+STORAGE_ACCESS_KEY ='NBZVbMUi6oQmNvuk6xQz7kFUNOq4DUYqCLIKZM6AWnvAmO35boWEVQQfr76RZqIeHh3iLJbNVizW+ASthLJugA=='
+
 BLOB_ACCOUNT_CONTAINER_URL = 'https://cdnstorageaccount2.blob.core.windows.net/ecomblobcontainer/'
-REDIS_ACCESS_KEY = os.environ['REDIS_ACCESS_KEY']
+
+#REDIS_ACCESS_KEY = os.environ['REDIS_ACCESS_KEY']
+REDIS_ACCESS_KEY = 'sFyETkfNxa6rdrrvDXIheZanx8BWvQMw7AzCaO7xbHQ='
+
 REDIS_HOSTNAME  = "ecommercecache.redis.cache.windows.net"
 ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png', 'gif'])
 app.config['UPLOAD_FOLDER'] = BLOB_ACCOUNT_CONTAINER_URL
@@ -293,7 +301,7 @@ def checkout():
         # add in database orders with state.
         with sql_connection().conn as con:
             item_orderId_mapping = []
-            queue_service = QueueServiceClient(account_name=STORAGE_ACCOUNT_NAME,account_key=STORAGE_ACCESS_KEY)
+            queue_service = QueueService(account_name=STORAGE_ACCOUNT_NAME,account_key=STORAGE_ACCESS_KEY)
             for item in products:
                 try:
                     cur = con.cursor()
@@ -315,8 +323,8 @@ def checkout():
                     })
 
                     # add the order details in queue.
-                    queue_service.encode_function = QueueMessage.binary_base64encode
-                    queue_service.decode_function = QueueMessage.binary_base64decode
+                    queue_service.encode_function = QueueMessageFormat.binary_base64encode
+                    queue_service.decode_function = QueueMessageFormat.binary_base64decode
                     queue_service.put_message("orders", base64.b64encode(json.dumps(queue_entry).encode()))
                 except Exception as e:
                     con.rollback()

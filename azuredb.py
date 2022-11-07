@@ -5,8 +5,11 @@ RESOURCE_GROUP = 'EcomWebsiteRG'
 LOCATION = 'eastus'  # example Azure availability zone, should match resource group
 SQL_SERVER = 'ecommercewebsite2.database.windows.net'
 SQL_DB = 'UserDatabase'
-USERNAME = os.environ['SQL_DB_USERNAME']
-PASSWORD = os.environ['SQL_DB_PASSWORD']
+#USERNAME = os.environ['SQL_DB_USERNAME']
+#PASSWORD = os.environ['SQL_DB_PASSWORD']
+
+USERNAME = 'minh'
+PASSWORD = 'Shine10114!'
 
 class sql_connection:
     def __init__(self):

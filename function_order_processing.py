@@ -12,11 +12,14 @@ from sendgrid.helpers.mail import *
 
 RESOURCE_GROUP = 'EcomWebsiteRG'
 LOCATION = 'eastus'  # example Azure availability zone, should match resource group
-SQL_SERVER = 'sqlserverecom.database.windows.net'
-SQL_DB = 'UserDatabase'
-USERNAME = 'user1'
-PASSWORD = os.environ["SQL_DB_Password"]
 
+#SQL_SERVER = 'sqlserverecom.database.windows.net'
+SQL_SERVEER = 'ecommercewebsite2.database.windows.net'
+SQL_DB = 'UserDatabase'
+#USERNAME = 'user1'
+USERNAME = 'minh'
+#PASSWORD = os.environ["SQL_DB_Password"]
+PASSWORD = 'Shine1011$'
 
 class sql_connection:
     def __init__(self):
